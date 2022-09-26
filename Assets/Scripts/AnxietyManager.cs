@@ -7,7 +7,7 @@ public class AnxietyManager : MonoBehaviour
     public float staffAnxietyMult = 1f; //The multiplier for how much anxiety the player gains whilst in a staff anxiety zone
     public float customerAnxietyMult = 1f; //The multiplier for how much anxiety the player gains whilst in a customer anxiety zone
     public float deliAnxietyMult = 1f; //The multiplier for how much anxiety the player gains whilst in a deli anxiety zone
-    public float anxietyLevel; //The level of anxiety the player has
+    
     public int anxIncreaseRate = 1; //How many seconds between ticks up of anxiety
     public int anxDecreaseRate = 1; //how many seconds between ticks down of anxiety
 
@@ -15,85 +15,89 @@ public class AnxietyManager : MonoBehaviour
     bool inAnxietyZone; //true/false value that determines if the player is in an anxiety zone or not
     
     int counter; //an integer value used as a timer
+    public float AnxietyLevel { get; set;} //The level of anxiety the player has
 
-    
     // Start is called before the first frame update
     void Start()
     {
         //setting base values
-        anxietyLevel = 0;
+        AnxietyLevel = 0;
         inAnxietyZone = false;
         anxietyMultiplier = 1;
         counter = 0;
     }
 
-    // Update is called once per frame
+    // FixedUpdate is called once per frame at 50fps
     void FixedUpdate()
     {
-        if (inAnxietyZone)//checks for if the user is in the zone
+        if (inAnxietyZone) //checks for if the user is in an anxiety zone
         {
-            if(counter >= (50 * anxIncreaseRate))
+            if(counter >= (50 * anxIncreaseRate)) //waits for the number of seconds determined by AnxIncreaseRate
             {
-                if(anxietyLevel >= 100)
+                if(AnxietyLevel >= 100) //checks if the number is 100 or more, if not increments
                 {
-                    anxietyLevel = 100;
+                    AnxietyLevel = 100; //rounds the number nicely at 100
                 }
                 else
                 {
-                    anxietyLevel += anxietyMultiplier;
+                    AnxietyLevel += anxietyMultiplier; //add anxiety based on anxiety multiplier
                 }
-                Debug.Log(anxietyLevel.ToString());
-                counter = 0;
+                Debug.Log(AnxietyLevel.ToString());
+                counter = 0;// resets timer
             }
             else
             {
-                counter++;
+                counter++;//increment timer up
             }
         }
-        else if (!inAnxietyZone)
+        else if (!inAnxietyZone) //checks for if the user is not in an anxiety zone
         {
-            if (counter >= (50*anxDecreaseRate))
+            if (counter >= (50*anxDecreaseRate)) //waits for the number of seconds determined by AnxDecreaseRate
             {
-                if (anxietyLevel <= 0)
+                if (AnxietyLevel <= 0) //checks if the number is 0 or less, if not decrements
                 {
-                    anxietyLevel = 0;
+                    AnxietyLevel = 0; //rounds the number nicely at 0
                 }
                 else
                 {
-                    anxietyLevel--;
+                    AnxietyLevel--; //decrements anxiety by 1
                 }
-                Debug.Log(anxietyLevel.ToString()); 
-                counter = 0;
+                Debug.Log(AnxietyLevel.ToString()); 
+                counter = 0;//resets timer
             }
             else
             {
-                counter++;
+                counter++;//increment timer up
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        counter = 0;
+        counter = 0;//resets timer
         if(other.tag == "StaffAZ")
         {
-            anxietyMultiplier = staffAnxietyMult;
+            anxietyMultiplier = staffAnxietyMult;//sets multiplier to the staff anxiety zone value
+            inAnxietyZone = true;//sets the player to be in the anxiety zone
         }
         if (other.tag ==  "CustomerAZ")
         {
-            anxietyMultiplier = customerAnxietyMult;
+            anxietyMultiplier = customerAnxietyMult;//sets multiplier to the customer anxiety zone value
+            inAnxietyZone = true;
         }
         if (other.tag == "DeliAZ")
         {
-            anxietyMultiplier = deliAnxietyMult;
+            anxietyMultiplier = deliAnxietyMult;//sets multiplier to the deli anxiety zone value
+            inAnxietyZone = true;
         }
-        inAnxietyZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         counter = 0;
-        inAnxietyZone = false;    
+        if (other.tag == "StaffAZ"|| other.tag == "CustomerAZ"|| other.tag == "DeliAZ")
+        {
+            inAnxietyZone = false;//sets the player to not be in the anxiety zone
+        }
     }
-
 }

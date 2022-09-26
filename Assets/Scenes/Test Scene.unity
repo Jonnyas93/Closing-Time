@@ -815,6 +815,8 @@ MonoBehaviour:
   customerAnxietyMult: 1
   deliAnxietyMult: 1
   anxietyLevel: 0
+  anxIncreaseRate: 1
+  anxDecreaseRate: 1
 --- !u!1 &1963858281
 GameObject:
   m_ObjectHideFlags: 0
