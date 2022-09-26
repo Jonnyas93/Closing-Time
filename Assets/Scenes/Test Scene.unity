@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 1549152949}
   m_Layer: 0
   m_Name: Anxiety Zone
-  m_TagString: Untagged
+  m_TagString: StaffAZ
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,6 +794,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1764895440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 1568242110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1764895446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764895440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66959feb1e4fd14fbf63b0b0cb1f0f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staffAnxietyMult: 1
+  customerAnxietyMult: 1
+  deliAnxietyMult: 1
+  anxietyLevel: 0
 --- !u!1 &1963858281
 GameObject:
   m_ObjectHideFlags: 0
