@@ -8,6 +8,7 @@ TagManager:
   - StaffAZ
   - CustomerAZ
   - DeliAZ
+  - Item
   layers:
   - Default
   - TransparentFX

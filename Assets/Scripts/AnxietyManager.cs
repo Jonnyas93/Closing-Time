@@ -42,7 +42,10 @@ public class AnxietyManager : MonoBehaviour
                 {
                     AnxietyLevel += anxietyMultiplier; //add anxiety based on anxiety multiplier
                 }
-                Debug.Log(AnxietyLevel.ToString());
+                if (AnxietyLevel < 100)
+                {
+                    Debug.Log(AnxietyLevel.ToString());
+                }
                 counter = 0;// resets timer
             }
             else
@@ -62,7 +65,10 @@ public class AnxietyManager : MonoBehaviour
                 {
                     AnxietyLevel--; //decrements anxiety by 1
                 }
-                Debug.Log(AnxietyLevel.ToString()); 
+                if (AnxietyLevel > 0)
+                {
+                    Debug.Log(AnxietyLevel.ToString());
+                }
                 counter = 0;//resets timer
             }
             else
