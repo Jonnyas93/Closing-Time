@@ -59,4 +59,18 @@ public class GameSFX : MonoBehaviour
             Debug.Log("Audio clips is empty");
         }
     }
+
+    public bool IsPlaying()
+    {
+        if (gameAudioSource.isPlaying)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
 }
