@@ -944,6 +944,7 @@ MonoBehaviour:
   conditionApplied: 0000000000
   heartbeatRate: 1
   fovDiv: 2
+  PPP: {fileID: 11400000, guid: 2f6e4607dfcbf404cbb5ce7d346e8d8d, type: 2}
 --- !u!114 &1764895452
 MonoBehaviour:
   m_ObjectHideFlags: 0
