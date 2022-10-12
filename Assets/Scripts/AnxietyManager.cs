@@ -212,7 +212,7 @@ public class AnxietyManager : MonoBehaviour
         if(conditionApplied[2])
         {
             float anxietyDecimal = (AnxietyLevel) / 100;
-            playerCamera.fieldOfView = startFOV * (1+((anxietyDecimal+(anxietyTiers[1]/100))/fovDiv));
+            playerCamera.fieldOfView = startFOV * (1+(anxietyDecimal-(anxietyTiers[2]/100)));//(1+((anxietyDecimal+(anxietyTiers[2]/100))/fovDiv));
             anxVignette.active = true;
             anxVignette.intensity.Override(anxietyDecimal);
         }
