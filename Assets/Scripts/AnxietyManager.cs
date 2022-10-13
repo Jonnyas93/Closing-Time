@@ -17,9 +17,10 @@ public class AnxietyManager : MonoBehaviour
 
     int counter; //an integer value used as a timer
     public float AnxietyLevel { get; set; } //The level of anxiety the player has
-    public float[] anxietyTiers = { 20, 40, 60, 80, 100 }; //the thresholds at which the anxiety effects start (difference between stages should be consistent)
+    public float[] anxietyTiers = { 10, 20, 30, 80, 100 }; //the thresholds at which the anxiety effects start
     public bool[] conditionApplied = { false, false, false, false, false };//An array of booleans that keeps track of what conditions should be affecting the player
-    [Tooltip("Lower is faster")] public float heartbeatRate = 1f;
+    [Tooltip("Lower is faster")] public float heartbeatRate = 1f;//Time between beats
+    [Tooltip("The point at which the heartbeat wont get any faster")] public float heartbeatCutoff = 20f;
     public float fovDiv = 1f; //how heavily the fov adjustment factor gets divided
 
     bool anxietyMaxxed = false;
@@ -180,9 +181,18 @@ public class AnxietyManager : MonoBehaviour
 
     void AnxietyEffects()
     {
-        if (conditionApplied[0])
+        if(conditionApplied[0])
         {
-            if (counterHeartSFX >= ((heartbeatRate * (100 - AnxietyLevel))))
+
+        }
+        if (conditionApplied[1])
+        {
+            float i = (heartbeatRate * (101 - AnxietyLevel));
+            if (i <= (heartbeatCutoff * heartbeatRate))
+            {
+                i = heartbeatCutoff * heartbeatRate;
+            }
+            if (counterHeartSFX >= i)
             {
                 if (!gSFX.IsPlaying())
                 {
@@ -199,15 +209,16 @@ public class AnxietyManager : MonoBehaviour
         {
             counterHeartSFX = 0;
         }
-        if(conditionApplied[1])
+        if(conditionApplied[2])
         {
             float anxietyDecimal = (AnxietyLevel) / 100;
-            playerCamera.fieldOfView = startFOV * (1+((anxietyDecimal+(anxietyTiers[1]/100))/fovDiv));
+            playerCamera.fieldOfView = startFOV * (1+(anxietyDecimal-(anxietyTiers[2]/100)));//(1+((anxietyDecimal+(anxietyTiers[2]/100))/fovDiv));
             anxVignette.active = true;
             anxVignette.intensity.Override(anxietyDecimal);
         }
         else
         {
+            playerCamera.fieldOfView = startFOV;
             anxVignette.active = false;
             anxVignette.intensity.Override(0);
         }
