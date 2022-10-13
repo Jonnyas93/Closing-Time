@@ -27,6 +27,8 @@ public class AnxietyManager : MonoBehaviour
     int counterHeartSFX;
     float startFOV;
     float startIntensity;
+    float vignetteGlide;
+    float prevAnx;
 
     Camera playerCamera;
     GameSFX gSFX;
@@ -48,6 +50,8 @@ public class AnxietyManager : MonoBehaviour
         startFOV = playerCamera.fieldOfView;
         anxVignette = PPP.GetSetting<Vignette>();
         startIntensity = anxVignette.intensity;
+        vignetteGlide = 0;
+        prevAnx = 0;
     }
 
     // FixedUpdate is called once per frame at 50fps
@@ -224,6 +228,28 @@ public class AnxietyManager : MonoBehaviour
         }
     }
 
+    void VignetteApply(float curAnx)
+    {
+        if (vignetteGlide < AnxietyLevel)
+        {
+            anxVignette.intensity.Override(vignetteGlide);
+            if (prevAnx < curAnx && curAnx !>= 99)
+            {
+                vignetteGlide += 0.1f;
+            }
+            else if (prevAnx > curAnx && curAnx !<= 0)
+            {
+                vignetteGlide--;
+            }
+            prevAnx = curAnx;
+
+        }
+        else
+        {
+            anxVignette.intensity.Override(curAnx);
+            prevAnx = curAnx;
+        }
+    }
 
     void AnxietyCheck(float lowVal, float highVal, ref bool condition)
     {
