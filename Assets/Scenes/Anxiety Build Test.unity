@@ -205,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059264876866015721, guid: d1491dd0d94099344857420afc115dc9, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7059264876866015721, guid: d1491dd0d94099344857420afc115dc9, type: 3}
       propertyPath: m_LocalScale.x
@@ -2922,7 +2922,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &796727802
 PrefabInstance:
@@ -5649,6 +5649,14 @@ PrefabInstance:
     - target: {fileID: 1880877909782558690, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: anxDecreaseDelay
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: anxIncreaseDelay
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}

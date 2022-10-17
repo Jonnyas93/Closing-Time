@@ -9,15 +9,15 @@ public class AnxietyManager : MonoBehaviour
     public float customerAnxietyMult = 1f; //The multiplier for how much anxiety the player gains whilst in a customer anxiety zone
     public float deliAnxietyMult = 1f; //The multiplier for how much anxiety the player gains whilst in a deli anxiety zone
 
-    public int anxIncreaseRate = 1; //How many seconds between ticks up of anxiety
-    public int anxDecreaseRate = 1; //how many seconds between ticks down of anxiety
+    public float anxIncreaseDelay = 10; //How many seconds between ticks up of anxiety
+    public float anxDecreaseDelay = 10; //how many seconds between ticks down of anxiety
 
     float anxietyMultiplier; //internal variable that holds the current zone's anxiety multiplier
     bool inAnxietyZone; //true/false value that determines if the player is in an anxiety zone or not
 
-    int counter; //an integer value used as a timer
+    float counter;
     public float AnxietyLevel { get; set; } //The level of anxiety the player has
-    public float[] anxietyTiers = { 10, 20, 30, 80, 100 }; //the thresholds at which the anxiety effects start
+    public float[] anxietyTiers = { 10, 20, 30, 40, 50 }; //the thresholds at which the anxiety effects start
     public bool[] conditionApplied = { false, false, false, false, false };//An array of booleans that keeps track of what conditions should be affecting the player
     [Tooltip("Lower is faster")] public float heartbeatRate = 1f;//Time between beats
     [Tooltip("The point at which the heartbeat wont get any faster")] public float heartbeatCutoff = 20f;
@@ -59,7 +59,7 @@ public class AnxietyManager : MonoBehaviour
     {
         if (inAnxietyZone) //checks for if the user is in an anxiety zone
         {
-            if (counter >= (50 * anxIncreaseRate)) //waits for the number of seconds determined by AnxIncreaseRate
+            if (counter >= (5 * anxIncreaseDelay)) //waits for the number of seconds determined by AnxIncreaseRate
             {
                 if (AnxietyLevel >= 100) //checks if the number is 100 or more, if not increments
                 {
@@ -82,7 +82,7 @@ public class AnxietyManager : MonoBehaviour
         }
         else if (!inAnxietyZone) //checks for if the user is not in an anxiety zone
         {
-            if (counter >= (50 * anxDecreaseRate)) //waits for the number of seconds determined by AnxDecreaseRate
+            if (counter >= (5 * anxDecreaseDelay)) //waits for the number of seconds determined by AnxDecreaseRate
             {
                 if (AnxietyLevel <= 0) //checks if the number is 0 or less, if not decrements
                 {
