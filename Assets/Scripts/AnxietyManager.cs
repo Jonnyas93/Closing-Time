@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,36 +6,40 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class AnxietyManager : MonoBehaviour
 {
-    public float staffAnxietyMult = 1f; //The multiplier for how much anxiety the player gains whilst in a staff anxiety zone
-    public float customerAnxietyMult = 1f; //The multiplier for how much anxiety the player gains whilst in a customer anxiety zone
-    public float deliAnxietyMult = 1f; //The multiplier for how much anxiety the player gains whilst in a deli anxiety zone
+    [Tooltip("The multiplier for how much anxiety the player gains whilst in a staff anxiety zone")] public float staffAnxietyMult = 1f;
+    [Tooltip("The multiplier for how much anxiety the player gains whilst in a customer anxiety zone")] public float customerAnxietyMult = 1f;
+    [Tooltip("The multiplier for how much anxiety the player gains whilst in a deli anxiety zone")] public float deliAnxietyMult = 1f;
 
-    public float anxIncreaseDelay = 10; //How many seconds between ticks up of anxiety
-    public float anxDecreaseDelay = 10; //how many seconds between ticks down of anxiety
+    [Tooltip("How many tenths seconds between ticks up of anxiety")] public float anxIncreaseDelay = 10;
+    [Tooltip("How many tenths seconds between ticks down of anxiety")] public float anxDecreaseDelay = 10;
 
     float anxietyMultiplier; //internal variable that holds the current zone's anxiety multiplier
     bool inAnxietyZone; //true/false value that determines if the player is in an anxiety zone or not
 
     float counter;
-    public float AnxietyLevel { get; set; } //The level of anxiety the player has
-    public float[] anxietyTiers = { 10, 20, 30, 40, 50 }; //the thresholds at which the anxiety effects start
-    public bool[] conditionApplied = { false, false, false, false, false };//An array of booleans that keeps track of what conditions should be affecting the player
-    [Tooltip("Lower is faster")] public float heartbeatRate = 1f;//Time between beats
+    [Tooltip("The level of anxiety the player has")] public float AnxietyLevel { get; set; }
+    [Tooltip("the thresholds at which the anxiety effects start")] public float[] anxietyTiers = { 10, 20, 30, 40, 50 };
+    [Tooltip("An array of booleans that keeps track of what conditions should be affecting the player")] public bool[] conditionApplied = { false, false, false, false, false };
+    [Tooltip("The minimum percentage of default speed that the player will reach when affected by anxiety")] public float moveSpeedCutoff = 10f;
+    [Tooltip("Time between beats, Lower is faster")] public float heartbeatRate = 1f;
     [Tooltip("The point at which the heartbeat wont get any faster")] public float heartbeatCutoff = 20f;
-    public float fovDiv = 1f; //how heavily the fov adjustment factor gets divided
+    [Tooltip("how heavily the fov adjustment factor gets divided")] public float fovDiv = 1f;
 
     bool anxietyMaxxed = false;
     int counterHeartSFX;
     float startFOV;
-    float startIntensity;
-    float vignetteGlide;
-    float prevAnx;
+    float startSpeed;
+    float startSprint;
 
     Camera playerCamera;
     GameSFX gSFX;
-    public PostProcessProfile PPP;
-    Vignette anxVignette;
     
+    Vignette anxVignette;
+    FirstPersonController playerController;
+
+    public PostProcessProfile PPP;
+    public Canvas ScreenBlackout;
+
 
     // Start is called before the first frame update
     void Start()
@@ -49,9 +54,9 @@ public class AnxietyManager : MonoBehaviour
         counterHeartSFX = 0;
         startFOV = playerCamera.fieldOfView;
         anxVignette = PPP.GetSetting<Vignette>();
-        startIntensity = anxVignette.intensity;
-        vignetteGlide = 0;
-        prevAnx = 0;
+        playerController = GetComponent<FirstPersonController>();
+        startSpeed = playerController.MoveSpeed;
+        startSprint = playerController.SprintSpeed;
     }
 
     // FixedUpdate is called once per frame at 50fps
@@ -169,7 +174,7 @@ public class AnxietyManager : MonoBehaviour
             conditionApplied[3] = true;
             conditionApplied[4] = false;
         }
-        if ((anxietyTiers[4]) < AnxietyLevel && AnxietyLevel <= 100f)
+        if ((anxietyTiers[4]) < AnxietyLevel && AnxietyLevel < 100f)
         {
             conditionApplied[0] = true;
             conditionApplied[1] = true;
@@ -187,7 +192,14 @@ public class AnxietyManager : MonoBehaviour
     {
         if(conditionApplied[0])
         {
-
+            float speedMult = (100 - AnxietyLevel + moveSpeedCutoff) / 100;
+            playerController.MoveSpeed = startSpeed * speedMult;
+            playerController.SprintSpeed = startSprint * speedMult;
+        }
+        else
+        {
+            playerController.MoveSpeed = startSpeed;
+            playerController.SprintSpeed = startSprint;
         }
         if (conditionApplied[1])
         {
@@ -228,27 +240,9 @@ public class AnxietyManager : MonoBehaviour
         }
     }
 
-    void VignetteApply(float curAnx)
+    void AnxietyBlackout()
     {
-        if (vignetteGlide < AnxietyLevel)
-        {
-            anxVignette.intensity.Override(vignetteGlide);
-            if (prevAnx < curAnx && curAnx !>= 99)
-            {
-                vignetteGlide += 0.1f;
-            }
-            else if (prevAnx > curAnx && curAnx !<= 0)
-            {
-                vignetteGlide--;
-            }
-            prevAnx = curAnx;
 
-        }
-        else
-        {
-            anxVignette.intensity.Override(curAnx);
-            prevAnx = curAnx;
-        }
     }
 
     void AnxietyCheck(float lowVal, float highVal, ref bool condition)
