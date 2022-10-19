@@ -24,6 +24,7 @@ public class AnxietyManager : MonoBehaviour
     [Tooltip("Time between beats, Lower is faster")] public float heartbeatRate = 1f;
     [Tooltip("The point at which the heartbeat wont get any faster")] public float heartbeatCutoff = 20f;
     [Tooltip("how heavily the fov adjustment factor gets divided")] public float fovDiv = 1f;
+    [Tooltip("Length the blackout goes for")] public float blackoutDuration = 2f;
 
     bool anxietyMaxxed = false;
     int counterHeartSFX;
@@ -33,12 +34,14 @@ public class AnxietyManager : MonoBehaviour
 
     Camera playerCamera;
     GameSFX gSFX;
-    
     Vignette anxVignette;
     FirstPersonController playerController;
+    Animator blackoutAnimator;
 
     public PostProcessProfile PPP;
-    public Canvas ScreenBlackout;
+    public Canvas screenBlackout;
+    public Transform blackoutTransform;
+   
 
 
     // Start is called before the first frame update
@@ -57,6 +60,7 @@ public class AnxietyManager : MonoBehaviour
         playerController = GetComponent<FirstPersonController>();
         startSpeed = playerController.MoveSpeed;
         startSprint = playerController.SprintSpeed;
+        blackoutAnimator = screenBlackout.GetComponentInChildren<Animator>();
     }
 
     // FixedUpdate is called once per frame at 50fps
@@ -238,11 +242,24 @@ public class AnxietyManager : MonoBehaviour
             anxVignette.active = false;
             anxVignette.intensity.Override(0);
         }
+        if(anxietyMaxxed)
+        {
+            anxietyMaxxed = false;
+            StartCoroutine(Blackout());
+        }
     }
 
-    void AnxietyBlackout()
+    IEnumerator Blackout()
     {
-
+        blackoutAnimator.Play("Blackout");
+        playerController.MoveSpeed = 0;
+        playerController.SprintSpeed = 0;
+        yield return new WaitForSeconds(blackoutDuration);
+        AnxietyLevel = 0;
+        playerController.MoveSpeed = startSpeed;
+        playerController.SprintSpeed = startSprint;
+        transform.position = blackoutTransform.position;
+        blackoutAnimator.Play("BlackoutEnd");
     }
 
     void AnxietyCheck(float lowVal, float highVal, ref bool condition)
