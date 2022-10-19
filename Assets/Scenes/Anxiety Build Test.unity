@@ -8451,7 +8451,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1353726098 stripped
 Transform:
@@ -9387,7 +9387,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1511527729
 GameObject:
@@ -10026,14 +10026,6 @@ PrefabInstance:
     - target: {fileID: 1880877909782558690, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1880877909782558693, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
-      propertyPath: JumpHeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
-      propertyPath: anxDecreaseRate
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: blackoutTransform
@@ -11127,7 +11119,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1759995141
 GameObject:
@@ -14296,63 +14288,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.01, y: 0.029608123, z: 0.009999999}
   m_Center: {x: 0.0000000017349029, y: 0.009804067, z: 0.00000005967004}
---- !u!1001 &7059264877372263147
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7059264876866015253, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_Name
-      value: Anxiety Zone
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.125
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.6751547
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059264876866015721, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e3947c746e83b14788b14b9e163cac9, type: 3}
 --- !u!1 &7415401757295732927
 GameObject:
   m_ObjectHideFlags: 0
