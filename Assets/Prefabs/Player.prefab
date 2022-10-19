@@ -276,7 +276,7 @@ MonoBehaviour:
   SprintSpeed: 6
   RotationSpeed: 1
   SpeedChangeRate: 10
-  JumpHeight: 1.2
+  JumpHeight: 0
   Gravity: -15
   JumpTimeout: 0.1
   FallTimeout: 0.15
@@ -542,7 +542,6 @@ MonoBehaviour:
   - 30
   - 40
   - 50
-  conditionApplied: 0000000000
   moveSpeedCutoff: 10
   heartbeatRate: 1
   heartbeatCutoff: 20

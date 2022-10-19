@@ -6,20 +6,16 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class AnxietyManager : MonoBehaviour
 {
+    [Header("Anxiety Factors")]
     [Tooltip("The multiplier for how much anxiety the player gains whilst in a staff anxiety zone")] public float staffAnxietyMult = 1f;
     [Tooltip("The multiplier for how much anxiety the player gains whilst in a customer anxiety zone")] public float customerAnxietyMult = 1f;
     [Tooltip("The multiplier for how much anxiety the player gains whilst in a deli anxiety zone")] public float deliAnxietyMult = 1f;
-
     [Tooltip("How many tenths seconds between ticks up of anxiety")] public float anxIncreaseDelay = 10;
     [Tooltip("How many tenths seconds between ticks down of anxiety")] public float anxDecreaseDelay = 10;
-
-    float anxietyMultiplier; //internal variable that holds the current zone's anxiety multiplier
-    bool inAnxietyZone; //true/false value that determines if the player is in an anxiety zone or not
-
-    float counter;
     [Tooltip("The level of anxiety the player has")] public float AnxietyLevel { get; set; }
     [Tooltip("the thresholds at which the anxiety effects start")] public float[] anxietyTiers = { 10, 20, 30, 40, 50 };
-    [Tooltip("An array of booleans that keeps track of what conditions should be affecting the player")] public bool[] conditionApplied = { false, false, false, false, false };
+
+    [Header("Effect Factors")]
     [Tooltip("The minimum percentage of default speed that the player will reach when affected by anxiety")] public float moveSpeedCutoff = 10f;
     [Tooltip("Time between beats, Lower is faster")] public float heartbeatRate = 1f;
     [Tooltip("The point at which the heartbeat wont get any faster")] public float heartbeatCutoff = 20f;
@@ -27,10 +23,14 @@ public class AnxietyManager : MonoBehaviour
     [Tooltip("Length the blackout goes for")] public float blackoutDuration = 2f;
 
     bool anxietyMaxxed = false;
+    bool[] conditionApplied = { false, false, false, false, false };
     int counterHeartSFX;
     float startFOV;
     float startSpeed;
     float startSprint;
+    float anxietyMultiplier; //internal variable that holds the current zone's anxiety multiplier
+    bool inAnxietyZone; //true/false value that determines if the player is in an anxiety zone or not
+    float counter;
 
     Camera playerCamera;
     GameSFX gSFX;
@@ -41,8 +41,6 @@ public class AnxietyManager : MonoBehaviour
     public PostProcessProfile PPP;
     public Canvas screenBlackout;
     public Transform blackoutTransform;
-   
-
 
     // Start is called before the first frame update
     void Start()
