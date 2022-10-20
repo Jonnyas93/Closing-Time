@@ -192,9 +192,9 @@ public class AnxietyManager : MonoBehaviour
 
     void AnxietyEffects()
     {
-        if(conditionApplied[0])
+        if(conditionApplied[1]) //speed debuff
         {
-            float speedMult = (100 - AnxietyLevel + moveSpeedCutoff) / 100;
+            float speedMult = (90 - AnxietyLevel + moveSpeedCutoff) / 100;
             playerController.MoveSpeed = startSpeed * speedMult;
             playerController.SprintSpeed = startSprint * speedMult;
         }
@@ -203,7 +203,7 @@ public class AnxietyManager : MonoBehaviour
             playerController.MoveSpeed = startSpeed;
             playerController.SprintSpeed = startSprint;
         }
-        if (conditionApplied[1])
+        if (conditionApplied[0]) //heartbeat effect
         {
             float i = (heartbeatRate * (101 - AnxietyLevel));
             if (i <= (heartbeatCutoff * heartbeatRate))
@@ -227,7 +227,7 @@ public class AnxietyManager : MonoBehaviour
         {
             counterHeartSFX = 0;
         }
-        if(conditionApplied[2])
+        if(conditionApplied[2]) //fov effect
         {
             float anxietyDecimal = (AnxietyLevel) / 100;
             playerCamera.fieldOfView = startFOV * (1+(anxietyDecimal-(anxietyTiers[2]/100)));//(1+((anxietyDecimal+(anxietyTiers[2]/100))/fovDiv));
