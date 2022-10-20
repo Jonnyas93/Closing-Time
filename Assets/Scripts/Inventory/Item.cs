@@ -5,17 +5,16 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     GameObject itemGameObject;
+    public string itemName;
 
     // Start is called before the first frame update
     void Start()
     {
-        itemGameObject = GetComponent<GameObject>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        itemGameObject = gameObject;
+        if (itemName == null)
+        {
+            itemName = "untitled Item";
+        }
     }
 
     public void PickUp()
