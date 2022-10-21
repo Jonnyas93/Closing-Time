@@ -8812,7 +8812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352813167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.41, y: 0.28, z: -57.471}
+  m_LocalPosition: {x: -25.41, y: 0.52, z: -57.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10450,13 +10450,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1880877909782558693, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: Gravity
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: deliAnxietyMult
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: anxDecreaseDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: anxIncreaseDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: staffAnxietyMult
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: blackoutTransform
       value: 
       objectReference: {fileID: 1352813168}
     - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
-      propertyPath: anxietyTiers.Array.data[0]
+      propertyPath: customerAnxietyMult
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: anxietyTiers.Array.data[0]
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: anxietyTiers.Array.data[1]
@@ -10464,15 +10488,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: anxietyTiers.Array.data[2]
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: anxietyTiers.Array.data[3]
-      value: 18
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: anxietyTiers.Array.data[4]
-      value: 28
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
