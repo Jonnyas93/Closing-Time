@@ -252,17 +252,19 @@ public class AnxietyManager : MonoBehaviour
         blackoutAnimator.Play("Blackout");
         playerController.MoveSpeed = 0;
         playerController.SprintSpeed = 0;
-        yield return new WaitForSeconds(blackoutDuration);
+        yield return new WaitForSeconds(blackoutDuration/2);
+        transform.position = blackoutTransform.position;
+        yield return new WaitForSeconds(blackoutDuration / 2);
         AnxietyLevel = 0;
         playerController.MoveSpeed = startSpeed;
         playerController.SprintSpeed = startSprint;
-        transform.position = blackoutTransform.position;
-        blackoutAnimator.Play("BlackoutEnd");
         conditionApplied[0] = false;
         conditionApplied[1] = false;
         conditionApplied[2] = false;
         conditionApplied[3] = false;
         conditionApplied[4] = false;
+        anxietyMaxxed = false;
+        blackoutAnimator.Play("BlackoutEnd");
     }
 
     void AnxietyCheck(float lowVal, float highVal, ref bool condition)
