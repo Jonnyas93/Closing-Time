@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 846480680}
   m_Layer: 0
   m_Name: Checkout
-  m_TagString: Untagged
+  m_TagString: Checkout
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -669,6 +669,10 @@ PrefabInstance:
     - target: {fileID: 2329433972459283792, guid: b4c37a59a54d81740b157c460884c163, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329433972459283794, guid: b4c37a59a54d81740b157c460884c163, type: 3}
+      propertyPath: itemName
+      value: Egg
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4c37a59a54d81740b157c460884c163, type: 3}

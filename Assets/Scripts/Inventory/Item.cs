@@ -17,14 +17,6 @@ public class Item : MonoBehaviour
     {
         CreateDictionary();
         itemGameObject = gameObject;
-        if (itemName == null)
-        {
-            Debug.LogError("Untitled Item Discovered");
-        }
-        if (scoreAmount <= 0)
-        {
-            scoreAmount = 100;
-        }
     }
 
     public void CreateDictionary()
@@ -37,8 +29,9 @@ public class Item : MonoBehaviour
                 scoreAmount = i.Value;
                 return;
             }
-            Debug.LogError("Unknown item discovered called:" + itemName);
+            
         }
+        Debug.LogError("Unknown item discovered called:" + itemName);
     }
 
     public void PickUp()

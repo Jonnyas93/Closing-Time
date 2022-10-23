@@ -9,6 +9,7 @@ TagManager:
   - CustomerAZ
   - DeliAZ
   - Item
+  - Checkout
   layers:
   - Default
   - TransparentFX

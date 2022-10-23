@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool interact;
+		public bool escape;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -20,6 +21,7 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
+
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
@@ -29,9 +31,13 @@ namespace StarterAssets
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+			if (cursorInputForLook)
 			{
 				LookInput(value.Get<Vector2>());
+			}
+			else
+			{
+				LookInput(new Vector2(0f, 0f));
 			}
 		}
 
@@ -46,8 +52,13 @@ namespace StarterAssets
 		}
 
 		public void OnInteract(InputValue value)
-        {
+		{
 			InteractInput(value.isPressed);
+		}
+
+		public void OnEscape(InputValue value)
+        {
+			EscapeInput(value.isPressed);
         }
 #endif
 
@@ -76,7 +87,12 @@ namespace StarterAssets
         {
 			interact = newInteractState;
         }
-		
+
+		public void EscapeInput(bool newEscapeState)
+        {
+			escape = newEscapeState;
+        }
+
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
