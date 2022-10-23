@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemSelector : MonoBehaviour
 {
-    bool overItem;
+    public bool overItem;
     Item itemSelected;
     // Start is called before the first frame update
     void Start()

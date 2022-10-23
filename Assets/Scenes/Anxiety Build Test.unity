@@ -1668,6 +1668,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2329433972459283794, guid: b4c37a59a54d81740b157c460884c163, type: 3}
+      propertyPath: itemName
+      value: Egg
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4c37a59a54d81740b157c460884c163, type: 3}
 --- !u!1 &207016037
@@ -11165,6 +11169,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2329433972459283792, guid: b4c37a59a54d81740b157c460884c163, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329433972459283794, guid: b4c37a59a54d81740b157c460884c163, type: 3}
+      propertyPath: itemName
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
