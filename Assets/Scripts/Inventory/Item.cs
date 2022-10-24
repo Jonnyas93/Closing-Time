@@ -24,14 +24,14 @@ public class Item : MonoBehaviour
         itemTypes = File.ReadLines("Assets/Scripts/itemList.csv").Select(line => line.Split(',')).ToDictionary(line => line[0], line => int.Parse(line[1]));
         foreach(var i in itemTypes)
         {
-            if (i.Key.ToString() == itemName)
+            if (i.Key.ToString().ToLower() == itemName.ToLower())
             {
+                itemName = i.Key.ToString();
                 scoreAmount = i.Value;
                 return;
             }
-            
         }
-        Debug.LogError("Unknown item discovered called:" + itemName);
+        Debug.LogWarning("Unknown item discovered called: " + itemName + " with GameObject name: " + name);
     }
 
     public void PickUp()

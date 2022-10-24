@@ -110,6 +110,7 @@ public class Inventory : MonoBehaviour
                     break;
                 }
             }
+            Debug.Log(itemTypes[selector].ToString());
             shoppingList.Add(itemTypes[selector]);
         }
     }
