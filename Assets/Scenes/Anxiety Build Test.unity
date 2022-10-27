@@ -59667,6 +59667,34 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1381290530, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381290530, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381290530, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381290530, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381290530, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381290530, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -115
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381290530, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -400
+      objectReference: {fileID: 0}
     - target: {fileID: 1248034563700534616, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -59714,6 +59742,22 @@ PrefabInstance:
     - target: {fileID: 1880877909782558690, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430119754204240, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430119754204240, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430119754204240, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894430119819406483, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 7894430121167944544, guid: 5010a3afafd3c2e4f989d753cb0d9050, type: 3}
       propertyPath: blackoutTransform
