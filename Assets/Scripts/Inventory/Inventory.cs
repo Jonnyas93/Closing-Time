@@ -22,11 +22,13 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject cameraRoot;
     [SerializeField] GameObject player;
     [SerializeField] ItemSelector itemSelector;
+    [SerializeField] GameObject CheckoutWall;
 
     [Tooltip("Number of items in the list to be collected")] public int ShoppingListLength = 3;
     public int inventoryScore;
     public bool inProgress = true;
     [Tooltip("Amount of time that the round runs for")] public int timeRemaining = 500;
+    [Tooltip("Amount the score given by time is multiplied by")] public int timeMult = 1;
 
     [Header("UI Elements")]
     [SerializeField] Canvas ui;
@@ -35,7 +37,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] TextMeshProUGUI inventoryScoreText;
     [SerializeField] TextMeshProUGUI timeRemaningText;
     [SerializeField] TextMeshProUGUI totalScoreText;
-    [SerializeField] GameObject pauseMenu;    
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] TextMeshProUGUI[] ShoppingListText;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +56,7 @@ public class Inventory : MonoBehaviour
             string[] splitItem = s.Split(',');
             itemTypes.Add(splitItem[0]);
         }
+        GenerateShoppingList();
         StartCoroutine(Timer());
     }
 
@@ -90,6 +94,10 @@ public class Inventory : MonoBehaviour
         {
             inProgress = false;
         }
+        if (other.tag == "Exit")
+        {
+            StartCoroutine(ExitGame());   
+        }
     }
 
     public void GenerateShoppingList()
@@ -98,6 +106,10 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < ShoppingListLength; i++)
         {
             selector = UnityEngine.Random.Range(0, itemTypes.Count);
+            if (pickedNumbers.Count == 0)
+            {
+                pickedNumbers.Add(selector);
+            }
             foreach (int number in pickedNumbers)
             {
                 if (selector == number)
@@ -110,23 +122,33 @@ public class Inventory : MonoBehaviour
                     break;
                 }
             }
-            Debug.Log(itemTypes[selector].ToString());
+            ShoppingListText[i].text = itemTypes[selector].ToString();
             shoppingList.Add(itemTypes[selector]);
         }
+        foreach (TextMeshProUGUI t in ShoppingListText)
+        {
+            if (t.text == "-")
+            {
+                t.gameObject.SetActive(false);
+            }
+        }
+            
+
     }
 
     public void WinGame()
     {
+        CheckoutWall.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         _input.cursorInputForLook = false;
         inventoryScoreText.text = "Item Score: " + inventoryScore.ToString();
-        timeRemaningText.text = "Time Score: " + timeRemaining.ToString();
-        totalScoreText.text = "Total Score: " + (timeRemaining + inventoryScore).ToString();
+        timeRemaningText.text = "Time Score: " + (timeRemaining*timeMult).ToString();
+        totalScoreText.text = "Total Score: " + (timeRemaining*timeMult + inventoryScore).ToString();
         receipt.SetActive(true);
     }
     public void LoseGame()
     {
-        Debug.Log("Lose");
+        SceneManager.LoadScene(2);
     }
 
     public void CloseReceipt()
@@ -192,5 +214,15 @@ public class Inventory : MonoBehaviour
             yield return new WaitForSeconds(1f);
             StartCoroutine(Timer());
         }
+    }
+
+    public IEnumerator ExitGame()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        _input.cursorInputForLook = false;
+        AnxietyManager ax = GetComponent<AnxietyManager>();
+        ax.AccessBlackout();
+        yield return new WaitForSeconds(ax.blackoutDuration);
+        MainMenu();
     }
 }

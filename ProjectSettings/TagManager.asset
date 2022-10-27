@@ -10,6 +10,7 @@ TagManager:
   - DeliAZ
   - Item
   - Checkout
+  - Exit
   layers:
   - Default
   - TransparentFX

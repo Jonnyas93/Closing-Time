@@ -267,6 +267,11 @@ public class AnxietyManager : MonoBehaviour
         blackoutAnimator.Play("BlackoutEnd");
     }
 
+    public void AccessBlackout()
+    {
+        blackoutAnimator.Play("Blackout");
+    }
+
     void AnxietyCheck(float lowVal, float highVal, ref bool condition)
     {
         if (lowVal < AnxietyLevel && AnxietyLevel <= highVal)
