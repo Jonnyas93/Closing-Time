@@ -21,6 +21,7 @@ public class AnxietyManager : MonoBehaviour
     [Tooltip("The point at which the heartbeat wont get any faster")] public float heartbeatCutoff = 20f;
     [Tooltip("how heavily the fov adjustment factor gets divided")] public float fovDiv = 1f;
     [Tooltip("Length the blackout goes for")] public float blackoutDuration = 2f;
+    [Tooltip("Amount of score removed by blacking out")] public int blackoutAmount = 500;
 
     bool anxietyMaxxed = false;
     bool[] conditionApplied = { false, false, false, false, false };
@@ -37,6 +38,7 @@ public class AnxietyManager : MonoBehaviour
     Vignette anxVignette;
     FirstPersonController playerController;
     Animator blackoutAnimator;
+    Inventory playerInventory;
 
     public PostProcessProfile PPP;
     public Canvas screenBlackout;
@@ -52,6 +54,7 @@ public class AnxietyManager : MonoBehaviour
         counter = 0;
         playerCamera = FindObjectOfType<Camera>();
         gSFX = GetComponent<GameSFX>();
+        playerInventory = GetComponent<Inventory>();
         counterHeartSFX = 0;
         startFOV = playerCamera.fieldOfView;
         anxVignette = PPP.GetSetting<Vignette>();
@@ -131,6 +134,10 @@ public class AnxietyManager : MonoBehaviour
         {
             anxietyMultiplier = deliAnxietyMult;//sets multiplier to the deli anxiety zone value
             inAnxietyZone = true;
+        }
+        if (other.tag == "Checkout")
+        {
+            AnxietyLevel = 0;
         }
     }
 
@@ -249,6 +256,7 @@ public class AnxietyManager : MonoBehaviour
 
     IEnumerator Blackout()
     {
+        playerInventory.blackoutScoreReduction -= blackoutAmount;
         blackoutAnimator.Play("Blackout");
         playerController.MoveSpeed = 0;
         playerController.SprintSpeed = 0;
