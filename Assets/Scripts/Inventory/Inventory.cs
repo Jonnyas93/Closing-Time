@@ -14,10 +14,12 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     private List<string> itemTypes;
+    private List<int> itemValues;
     private List<int> pickedNumbers;
     private List<Item> inventory;
     private List<string> shoppingList;
     private StarterAssetsInputs _input;
+    private string output;
 
     [SerializeField] GameObject cameraRoot;
     [SerializeField] GameObject player;
@@ -29,6 +31,7 @@ public class Inventory : MonoBehaviour
     public bool inProgress = true;
     [Tooltip("Amount of time that the round runs for")] public int timeRemaining = 500;
     [Tooltip("Amount the score given by time is multiplied by")] public int timeMult = 1;
+    public int blackoutScoreReduction = 0;
 
     [Header("UI Elements")]
     [SerializeField] Canvas ui;
@@ -36,6 +39,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject receipt;
     [SerializeField] TextMeshProUGUI inventoryScoreText;
     [SerializeField] TextMeshProUGUI timeRemaningText;
+    [SerializeField] TextMeshProUGUI blackoutReductionText;
     [SerializeField] TextMeshProUGUI totalScoreText;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] TextMeshProUGUI[] ShoppingListText;
@@ -46,6 +50,7 @@ public class Inventory : MonoBehaviour
         pauseMenu.SetActive(false);
         receipt.SetActive(false);
         itemTypes = new List<string>();
+        itemValues = new List<int>();
         pickedNumbers = new List<int>();
         shoppingList = new List<string>();
         inventory = new List<Item>();
@@ -55,6 +60,7 @@ public class Inventory : MonoBehaviour
         {
             string[] splitItem = s.Split(',');
             itemTypes.Add(splitItem[0]);
+            itemValues.Add(Int32.Parse(splitItem[1]));
         }
         GenerateShoppingList();
         StartCoroutine(Timer());
@@ -64,7 +70,7 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         Item i;
-        if(_input.escape == true)
+        if (_input.escape == true)
         {
             Pause();
         }
@@ -96,7 +102,7 @@ public class Inventory : MonoBehaviour
         }
         if (other.tag == "Exit")
         {
-            StartCoroutine(ExitGame());   
+            StartCoroutine(ExitGame());
         }
     }
 
@@ -132,18 +138,45 @@ public class Inventory : MonoBehaviour
                 t.gameObject.SetActive(false);
             }
         }
-            
 
+
+    }
+
+    public void CalcInvScore()
+    {
+
+        for (int i = 0; i < itemTypes.Count; i++)
+        {
+            foreach (string s in shoppingList)
+            {
+                if (s == itemTypes[i])
+                {
+                    int itemTypeCount = 0;
+                    for (int n = 0; n < inventory.Count; n++)
+                    {
+                        if (inventory[n].itemName == itemTypes[i])
+                        {
+                            itemTypeCount += 1;
+                        }
+                    }
+                    inventoryScore += (itemTypeCount * itemValues[i]);
+                    output += itemTypes[i] + " X " + itemTypeCount.ToString() + " = " + (itemTypeCount * itemValues[i]).ToString() + "\n";
+                    break;
+                }
+            }
+        }
     }
 
     public void WinGame()
     {
+        CalcInvScore();
         CheckoutWall.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         _input.cursorInputForLook = false;
-        inventoryScoreText.text = "Item Score: " + inventoryScore.ToString();
+        inventoryScoreText.text = "Item Score: \n-------------------\n" + output;
         timeRemaningText.text = "Time Score: " + (timeRemaining*timeMult).ToString();
-        totalScoreText.text = "Total Score: " + (timeRemaining*timeMult + inventoryScore).ToString();
+        blackoutReductionText.text = "Blackout Score reduction: " + blackoutScoreReduction.ToString();
+        totalScoreText.text = "Total Score: " + (timeRemaining*timeMult + inventoryScore + blackoutScoreReduction).ToString();
         receipt.SetActive(true);
     }
     public void LoseGame()
