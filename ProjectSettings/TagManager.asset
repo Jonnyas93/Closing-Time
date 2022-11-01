@@ -11,6 +11,7 @@ TagManager:
   - Item
   - Checkout
   - Exit
+  - Barrier
   layers:
   - Default
   - TransparentFX

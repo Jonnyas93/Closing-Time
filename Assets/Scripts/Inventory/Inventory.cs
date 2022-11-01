@@ -80,13 +80,6 @@ public class Inventory : MonoBehaviour
             {
                 i = itemSelector.ReturnItem();
                 inventory.Add(i);
-                foreach (string n in shoppingList)
-                {
-                    if (n == i.itemName)
-                    {
-                        inventoryScore += i.scoreAmount;
-                    }
-                }
                 i.PickUp();
             }
         }
@@ -176,7 +169,7 @@ public class Inventory : MonoBehaviour
         inventoryScoreText.text = "Item Score: \n-------------------\n" + output;
         timeRemaningText.text = "Time Score: " + (timeRemaining*timeMult).ToString();
         blackoutReductionText.text = "Blackout Score reduction: " + blackoutScoreReduction.ToString();
-        totalScoreText.text = "Total Score: " + (timeRemaining*timeMult + inventoryScore + blackoutScoreReduction).ToString();
+        totalScoreText.text = "Total Score: " + ((timeRemaining*timeMult) + inventoryScore + blackoutScoreReduction).ToString();
         receipt.SetActive(true);
     }
     public void LoseGame()

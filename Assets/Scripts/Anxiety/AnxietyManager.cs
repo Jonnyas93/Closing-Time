@@ -249,6 +249,7 @@ public class AnxietyManager : MonoBehaviour
         }
         if(anxietyMaxxed)
         {
+            
             anxietyMaxxed = false;
             StartCoroutine(Blackout());
         }
@@ -256,6 +257,7 @@ public class AnxietyManager : MonoBehaviour
 
     IEnumerator Blackout()
     {
+        AnxietyLevel = 0;
         playerInventory.blackoutScoreReduction -= blackoutAmount;
         blackoutAnimator.Play("Blackout");
         playerController.MoveSpeed = 0;
@@ -263,7 +265,6 @@ public class AnxietyManager : MonoBehaviour
         yield return new WaitForSeconds(blackoutDuration/2);
         transform.position = blackoutTransform.position;
         yield return new WaitForSeconds(blackoutDuration / 2);
-        AnxietyLevel = 0;
         playerController.MoveSpeed = startSpeed;
         playerController.SprintSpeed = startSprint;
         conditionApplied[0] = false;
@@ -271,7 +272,6 @@ public class AnxietyManager : MonoBehaviour
         conditionApplied[2] = false;
         conditionApplied[3] = false;
         conditionApplied[4] = false;
-        anxietyMaxxed = false;
         blackoutAnimator.Play("BlackoutEnd");
     }
 
