@@ -27,11 +27,38 @@ public class CustomerMover : MonoBehaviour
         {
             MoveCustomer();
         }
+        if(other.CompareTag("Player"))
+        {
+            movementSpeed *= -1;
+            if (xMoving)
+            {
+                cT.AddForce(new Vector3(movementSpeed/2, 0, 0));
+            }
+            else
+            {
+                cT.AddForce(new Vector3(0, 0, movementSpeed/2));
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            movementSpeed *= -1;
+            if (xMoving)
+            {
+                cT.AddForce(new Vector3(movementSpeed / 2, 0, 0));
+            }
+            else
+            {
+                cT.AddForce(new Vector3(0, 0, movementSpeed / 2));
+            }
+        }
     }
 
     public void MoveCustomer()
     {
-        
         movementSpeed *= -1;
         if (xMoving)
         {

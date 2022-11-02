@@ -109,13 +109,24 @@ public class Inventory : MonoBehaviour
             {
                 pickedNumbers.Add(selector);
             }
-            foreach (int number in pickedNumbers)
+            else
             {
-                if (selector == number)
+                Debug.Log("Entered else");
+                foreach (int number in pickedNumbers)
                 {
-                    while (selector == number)
+                    Debug.Log("Entered foreach with number " + number.ToString());
+                    if (selector == number)
                     {
-                        selector = UnityEngine.Random.Range(0, itemTypes.Count);
+                        Debug.Log("Entered if");
+                        while (selector == number)
+                        {
+                            Debug.Log("Before Selector: " + selector.ToString());
+                            selector = UnityEngine.Random.Range(0, itemTypes.Count);
+                            Debug.Log("After Selector: " + selector.ToString());
+                        }
+                        Debug.Log("Final Selector: " + selector.ToString());
+                        pickedNumbers.Add(selector);
+                        break;
                     }
                     pickedNumbers.Add(selector);
                     break;
