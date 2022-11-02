@@ -111,26 +111,20 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                Debug.Log("Entered else");
-                foreach (int number in pickedNumbers)
+                for (int number = 0; number < pickedNumbers.Count; number++)
                 {
-                    Debug.Log("Entered foreach with number " + number.ToString());
-                    if (selector == number)
+                    
+                    if (selector == pickedNumbers[number])
                     {
-                        Debug.Log("Entered if");
-                        while (selector == number)
+                        
+                        while (selector == pickedNumbers[number])
                         {
-                            Debug.Log("Before Selector: " + selector.ToString());
                             selector = UnityEngine.Random.Range(0, itemTypes.Count);
-                            Debug.Log("After Selector: " + selector.ToString());
+                            number = 0;
                         }
-                        Debug.Log("Final Selector: " + selector.ToString());
-                        pickedNumbers.Add(selector);
-                        break;
                     }
-                    pickedNumbers.Add(selector);
-                    break;
                 }
+                pickedNumbers.Add(selector);
             }
             ShoppingListText[i].text = itemTypes[selector].ToString();
             shoppingList.Add(itemTypes[selector]);
@@ -142,8 +136,6 @@ public class Inventory : MonoBehaviour
                 t.gameObject.SetActive(false);
             }
         }
-
-
     }
 
     public void CalcInvScore()
