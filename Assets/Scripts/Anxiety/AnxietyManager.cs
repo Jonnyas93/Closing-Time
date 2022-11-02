@@ -138,6 +138,11 @@ public class AnxietyManager : MonoBehaviour
         if (other.tag == "Checkout")
         {
             AnxietyLevel = 0;
+            conditionApplied[0] = false;
+            conditionApplied[1] = false;
+            conditionApplied[2] = false;
+            conditionApplied[3] = false;
+            conditionApplied[4] = false;
         }
     }
 
