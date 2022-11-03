@@ -62,6 +62,7 @@ public class AnxietyManager : MonoBehaviour
         startSpeed = playerController.MoveSpeed;
         startSprint = playerController.SprintSpeed;
         blackoutAnimator = screenBlackout.GetComponentInChildren<Animator>();
+        gSFX.PlaySound(2, 0.5f);
     }
 
     // FixedUpdate is called once per frame at 50fps

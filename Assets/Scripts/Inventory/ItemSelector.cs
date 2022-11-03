@@ -33,6 +33,7 @@ public class ItemSelector : MonoBehaviour
     {
         if (overItem == true)
         {
+            overItem = false;
             return itemSelected;
         }
         else

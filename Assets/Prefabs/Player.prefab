@@ -3461,6 +3461,7 @@ MonoBehaviour:
   heartbeatCutoff: 20
   fovDiv: 2
   blackoutDuration: 2
+  blackoutAmount: 500
   PPP: {fileID: 11400000, guid: 2f6e4607dfcbf404cbb5ce7d346e8d8d, type: 2}
   screenBlackout: {fileID: 7894430119754204241}
   blackoutTransform: {fileID: 0}

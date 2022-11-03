@@ -13,18 +13,23 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    private string output;
     private List<string> itemTypes;
     private List<int> itemValues;
     private List<int> pickedNumbers;
     private List<Item> inventory;
     private List<string> shoppingList;
     private StarterAssetsInputs _input;
-    private string output;
+
+    private AnxietyManager anxMan;
+    private int divTime;
+    
 
     [SerializeField] GameObject cameraRoot;
     [SerializeField] GameObject player;
     [SerializeField] ItemSelector itemSelector;
     [SerializeField] GameObject CheckoutWall;
+    [SerializeField] GameSFX gSFX;
 
     [Tooltip("Number of items in the list to be collected")] public int ShoppingListLength = 3;
     public int inventoryScore;
@@ -44,9 +49,12 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] TextMeshProUGUI[] ShoppingListText;
 
+     
+
     // Start is called before the first frame update
     void Start()
     {
+        divTime = timeRemaining/4;
         pauseMenu.SetActive(false);
         receipt.SetActive(false);
         itemTypes = new List<string>();
@@ -55,6 +63,7 @@ public class Inventory : MonoBehaviour
         shoppingList = new List<string>();
         inventory = new List<Item>();
         _input = GetComponent<StarterAssetsInputs>();
+        anxMan = GetComponent<AnxietyManager>();
         string[] lines = File.ReadAllLines("Assets/Scripts/itemList.csv");
         foreach (string s in lines)
         {
@@ -62,6 +71,7 @@ public class Inventory : MonoBehaviour
             itemTypes.Add(splitItem[0]);
             itemValues.Add(Int32.Parse(splitItem[1]));
         }
+        
         GenerateShoppingList();
         StartCoroutine(Timer());
     }
@@ -78,6 +88,7 @@ public class Inventory : MonoBehaviour
         {
             if (itemSelector.overItem)
             {
+                gSFX.PlaySound(0);
                 i = itemSelector.ReturnItem();
                 inventory.Add(i);
                 i.PickUp();
@@ -166,6 +177,8 @@ public class Inventory : MonoBehaviour
     public void WinGame()
     {
         CalcInvScore();
+        gSFX.PlaySound(3, 0.5f);
+        StartCoroutine(gSFX.PlaySoundWait(2,0.25f));
         CheckoutWall.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         _input.cursorInputForLook = false;
@@ -225,6 +238,11 @@ public class Inventory : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeRemaining / 60);
         int Seconds = Mathf.FloorToInt(timeRemaining % 60);
         timerText.text = "Time remaining: " + minutes.ToString("00") + ":" + Seconds.ToString("00");
+        if (timeRemaining < divTime)
+        {
+            float anxLev = (anxMan.AnxietyLevel / 2 + 50) / 100;
+            gSFX.PlaySound(1, anxLev);
+        }
         if (timeRemaining <= 0)
         {
             inProgress = false;
