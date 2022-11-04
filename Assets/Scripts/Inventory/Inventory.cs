@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
         inventory = new List<Item>();
         _input = GetComponent<StarterAssetsInputs>();
         anxMan = GetComponent<AnxietyManager>();
-        string[] lines = File.ReadAllLines("Assets/Scripts/itemList.csv");
+        string[] lines = File.ReadAllLines("itemList.csv");
         foreach (string s in lines)
         {
             string[] splitItem = s.Split(',');

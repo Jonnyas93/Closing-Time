@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
 
     public void CreateDictionary()
     {
-        itemTypes = File.ReadLines("Assets/Scripts/itemList.csv").Select(line => line.Split(',')).ToDictionary(line => line[0], line => int.Parse(line[1]));
+        itemTypes = File.ReadLines("itemList.csv").Select(line => line.Split(',')).ToDictionary(line => line[0], line => int.Parse(line[1]));
         foreach(var i in itemTypes)
         {
             if (i.Key.ToString().ToLower() == itemName.ToLower())
