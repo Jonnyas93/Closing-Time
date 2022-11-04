@@ -71,7 +71,6 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
-		private GameSFX gSFX;
 
 		private const float _threshold = 0.01f;
 
@@ -98,7 +97,6 @@ namespace StarterAssets
 
 		private void Start()
 		{
-			gSFX = GetComponent<GameSFX>();
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -194,10 +192,6 @@ namespace StarterAssets
 			if (_input.move != Vector2.zero)
 			{
                 // move
-                if (gSFX.IsPlaying() == false)
-                {
-                    gSFX.PlaySound(1,0.25f);
-                }
                 inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 			}
 
